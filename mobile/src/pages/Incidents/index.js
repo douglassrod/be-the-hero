@@ -14,7 +14,7 @@ export default function Incidents() {
     const navigation = useNavigation()
     const [incidents, setIncidents] = useState([])
     const [total, setTotal] = useState(0)
-    const [pages, setPages] = useState(1)
+    const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
 
         function formatMoney(value) {
@@ -37,12 +37,12 @@ export default function Incidents() {
             setLoading(true)
 
             const res = await api.get('incidents', {
-                params: { pages }
+                params: { page }
             })
 
             setIncidents([...incidents, ... res.data])
             setTotal(res.headers['x-total-count'])
-            setPages(pages + 1)
+            setPage(page + 1)
             setLoading(false)
         }
 
